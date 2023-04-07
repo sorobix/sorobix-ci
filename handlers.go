@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 	"io"
 	"os/exec"
@@ -13,6 +14,7 @@ func deployer(repo Repository) (string, error) {
 }
 
 func executor(uuid string, repo Repository) error {
+	fmt.Println("executor initiating")
 	cmd := exec.Command(SCRIPT)
 	stderr, err := cmd.StderrPipe()
 	stdout, err := cmd.StdoutPipe()
@@ -30,6 +32,7 @@ func executor(uuid string, repo Repository) error {
 		StdErr: errors,
 		Time:   time.Now().String(),
 	}
+	fmt.Println(results)
 	err = repo.InsertDeployment(d)
 	if err != nil {
 		return err
