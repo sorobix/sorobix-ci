@@ -1,3 +1,5 @@
 sorobix-ci-db/
 env/
 .idea/
+bin/
+sorobix-ci
